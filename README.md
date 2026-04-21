@@ -1,4 +1,4 @@
-# Article Hub — Frontend
+# Article Hub - Frontend
 
 > **Read in:** [Русский](./README.ru.md)
 
@@ -62,7 +62,7 @@ The application includes an admin panel for users with elevated roles (MANAGER /
 
 ## Architecture
 
-The project strictly follows **Feature Sliced Design (FSD)** — a scalable, modular frontend architecture that organises code by business domain and enforces strict boundaries between layers.
+The project strictly follows **Feature Sliced Design (FSD)** - a scalable, modular frontend architecture that organises code by business domain and enforces strict boundaries between layers.
 
 ```
 src/
@@ -84,15 +84,15 @@ No layer may import from a layer above it, which keeps every module isolated, in
 
 ### Key architectural decisions
 
-**Dynamic reducer injection** — Redux slices are loaded on demand via `DynamicModuleLoader`. Only the reducers the current page needs are in memory, keeping the initial bundle lean.
+**Dynamic reducer injection** - Redux slices are loaded on demand via `DynamicModuleLoader`. Only the reducers the current page needs are in memory, keeping the initial bundle lean.
 
-**Feature flags** — The `toggleFeatures({ name, on, off })` utility enables gradual rollout of new functionality without branching or duplicating routes. The `isAppRedesigned` flag switches the entire design system at runtime.
+**Feature flags** - The `toggleFeatures({ name, on, off })` utility enables gradual rollout of new functionality without branching or duplicating routes. The `isAppRedesigned` flag switches the entire design system at runtime.
 
-**Dual design system** — A `deprecated/` UI kit (original design) coexists with a `redesigned/` kit in `shared/ui/`. The feature flag decides which one renders — no user sees a half-migrated UI.
+**Dual design system** - A `deprecated/` UI kit (original design) coexists with a `redesigned/` kit in `shared/ui/`. The feature flag decides which one renders - no user sees a half-migrated UI.
 
-**Code splitting** — Every page is lazy-loaded via `React.lazy()` following the `.async.tsx` naming convention. Reducers follow the same on-demand pattern.
+**Code splitting** - Every page is lazy-loaded via `React.lazy()` following the `.async.tsx` naming convention. Reducers follow the same on-demand pattern.
 
-**Public API exports** — Each FSD module exposes only what it intends to share through its `index.ts`. Internal implementation details are not importable from the outside.
+**Public API exports** - Each FSD module exposes only what it intends to share through its `index.ts`. Internal implementation details are not importable from the outside.
 
 ---
 
@@ -241,7 +241,7 @@ password: 123
 
 The project has **three complementary layers of testing**:
 
-### Unit tests — Jest + React Testing Library
+### Unit tests - Jest + React Testing Library
 
 Tests live alongside source files (`Component.test.tsx`). SCSS modules and SVGs are mocked. Module aliases (`@/`) resolve automatically. The `@testing-library/jest-dom` matchers are globally available. An HTML report is generated in `reports/` after each run.
 
@@ -249,7 +249,7 @@ Tests live alongside source files (`Component.test.tsx`). SCSS modules and SVGs 
 npm run test:unit
 ```
 
-### End-to-end tests — Cypress
+### End-to-end tests - Cypress
 
 Full user-journey tests in `/cypress/e2e/` cover authentication, article browsing, article creation, profile editing, and more. Reusable commands and fixtures live in `/cypress/support/`.
 
@@ -257,7 +257,7 @@ Full user-journey tests in `/cypress/e2e/` cover authentication, article browsin
 npm run test:e2e
 ```
 
-### Visual regression — Loki
+### Visual regression - Loki
 
 Loki renders Storybook stories in a headless Chrome Docker container and compares pixel-perfect screenshots against approved references. Two viewports are tested: **desktop** (1366×768) and **mobile** (iPhone 7).
 
@@ -273,11 +273,11 @@ npm run test:ui:ci     # strict mode (fails on any diff)
 
 GitHub Actions pipeline (`.github/workflows/main.yml`) runs on every push and pull request to `master`:
 
-1. `npm ci` — clean install
-2. `npm run build:prod` — production build
-3. `npm run lint:ts` — TypeScript lint
-4. `npm run lint:scss` — SCSS lint
-5. `npm run test:unit` — unit tests
+1. `npm ci` - clean install
+2. `npm run build:prod` - production build
+3. `npm run lint:ts` - TypeScript lint
+4. `npm run lint:scss` - SCSS lint
+5. `npm run test:unit` - unit tests
 
 All steps use `if: always()` so failures at one step do not hide failures at subsequent steps. The pipeline targets **Node.js 21.x**.
 
@@ -356,7 +356,7 @@ This is not a toy project. The codebase reflects real-world enterprise frontend 
 | **Code quality** | ESLint (Airbnb + FSD rules), Stylelint, Prettier, Husky pre-commit |
 | **Performance** | Code splitting, lazy routes, lazy reducers, debounce, infinite scroll |
 | **Internationalization** | Full bilingual support with namespace-separated translation files |
-| **Design system migration** | Dual UI kit with runtime feature flag — zero big-bang rewrites |
+| **Design system migration** | Dual UI kit with runtime feature flag - zero big-bang rewrites |
 | **Build tooling** | Hand-crafted Webpack 5 config + Vite as a zero-config alternative |
 | **CI/CD** | Automated build, lint, and test pipeline on every commit |
 | **Component documentation** | Storybook stories with API mocking and theme/language variants |
